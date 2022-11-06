@@ -1,8 +1,8 @@
-Mission: To provide a thin layer around the raw SOAP interaction that consumes Salesforce's
-Enterprise and Partner WSDLs and handles the nitty-gritty details of the SOAP interaction.
+### Mission: To provide a thin layer around the raw SOAP interaction that consumes Salesforce's
+### Enterprise and Partner WSDLs and handles the nitty-gritty details of the SOAP interaction.
 
 
-The Salesforce Python Toolkit features the following:
+## The Salesforce Python Toolkit features the following:
   - Supports both the Enterprise and Partner WSDL
   - Unifies the interface to Enterprise and Partner objects.  There should be no such thing as an
     'Enterprise' example or a 'Partner' example, outside of specifying the correct WSDL and 
@@ -19,7 +19,7 @@ The Salesforce Python Toolkit features the following:
   - Allows you to pass a relative path, absolute page, or local or remote URL pointing to your WSDL
 
 
-But what about those other libraries?  And why Suds and not SOAPpy or ZSI?  And why not just Suds?
+## But what about those other libraries?  And why Suds and not SOAPpy or ZSI?  And why not just Suds?
   - First and foremost, SOAPpy and ZSI dead projects.
   - Why not SOAPpy?   http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=523083
     - You can't use the Enterprise WSDL because SOAPpy doesn't support manually setting namespace 
@@ -31,7 +31,7 @@ But what about those other libraries?  And why Suds and not SOAPpy or ZSI?  And 
       of Suds would make perfect sense.  Unfortunately, this just isn't the case.
 
 
-Dependencies:
+## Dependencies:
   - Suds 0.3.6+
     - You can install suds by issuing `easy_install suds --install-dir=<install directory>` 
       - This method requires setuptools.
@@ -39,17 +39,17 @@ Dependencies:
       can simply unpack 0.3.6+ and add the path to PYTHONPATH.
 
 
-Tested with:
+## Tested with:
   - OS X 10.5
   - Python 2.5.1
   - suds 0.3.6
 
 
-Examples:
+## Examples:
   - You can find examples for every method call in the EXAMPLES file.
 
 
-Caching:
+## Caching:
   - The Toolkit supports caching of remote WSDL files for a defineable amount of time (in seconds):
 
 h = SforceEnterpriseClient('https://example.com/enterprise.wsdl.xml', cacheDuration = 90) 
@@ -57,7 +57,7 @@ h = SforceEnterpriseClient('https://example.com/enterprise.wsdl.xml', cacheDurat
 h = SforcePartnerClient('https://example.com/partner.wsdl.xml', cacheDuration = 86400) # 1 day
 
 
-Proxies:
+## Proxies:
   - The toolkit supports HTTP proxies, but not HTTPS.  This is due to a limitation in the underlying
     urllib2 library that ships with Python.  Details can be found at the bottom of this document.
 
@@ -72,7 +72,7 @@ h = SforcePartnerClient('partner.wsdl.xml', proxy = {'http': 'proxy.example.com:
     Any attempt to pass an https proxy will raise a NotImplementedError.
 
 
-Inspecting your data:
+## Inspecting your data:
   - It's quite simple to see the structure of your objects.  For instance:
 
 lead = h.generateObject('Lead')
@@ -82,7 +82,7 @@ lead.Company = 'Jamoke, Inc.'
 
 print lead
 
-outputs this:
+## outputs this:
 
 (sObject){
    fieldsToNull[] = <empty>
@@ -94,7 +94,7 @@ outputs this:
  }
 
 
-Strict- and non-strict modes:
+## Strict- and non-strict modes:
   - Set with the method call setStrictResultTyping() (takes a bool)
   - If any of the following calls return a single result, the result object will not be wrapped in a
     list (i.e. returns sObject instead of [sObject]):
@@ -122,25 +122,25 @@ sendEmail()
         instead of emptyRecycleBin(['001x00000000JerAAE'])
 
 
-Logging:
+## Logging:
   - If you're curious what's happening at the SOAP level, Suds offers you a great deal of 
     information.  Have a look at https://fedorahosted.org/suds/wiki/Documentation#LOGGING for more
     information.
 
 
-Conventions:
+## Conventions:
   - Fields are named internally exactly as they are specified in the documentation and the XML,
     except where they differ (userID vs. userId is one example), in which case the XML spec wins.
 
 
-Caveats (short form):
+## Caveats (short form):
   - gzip/deflate not implemented
   - HTTP 1.1 persistent connections not supported
   - Supports HTTP proxies, not HTTPS (traffic between the proxy and Salesforce still sent HTTPS)
   - na0.salesforce.com (a.k.a ssl.salesforce.com) probably doesn't work
 
 
-Caveats (long form):
+## Caveats (long form):
   - gzip/deflate not implemented
     - Suds doesn't handle HTTP headers in SOAP response such as 
       Content-Encoding: gzip
