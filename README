@@ -170,4 +170,4 @@ sendEmail()
       to use any non-8859-1 characters, but Salesforce _might_ be willing to interact using that
       header.  Needless to say, this would be a horrible hack at best.
   - For caveats that don't affect the end-user, but do concern implementation details, see the 
-    HACKS file
+    HACKS file 
